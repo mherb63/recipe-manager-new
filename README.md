@@ -1,5 +1,7 @@
 ### Recipe Manager
 
+![Image 1](src/main/resources/static/images/screen-shot.png)
+
 
 ##### This is a simple Spring Boot project which was built to demonstrate Spring Boot, Spring Data Mongo, @RestController, and Project Lombok.
 
