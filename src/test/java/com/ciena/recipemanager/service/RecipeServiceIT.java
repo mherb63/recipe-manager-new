@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 @RunWith(SpringRunner.class)
@@ -96,6 +97,23 @@ public class RecipeServiceIT {
     @Test(expected = RecipeNotFoundException.class)
     public void testRecipeNotFoundException() {
         recipeService.findById("nonExistingId");
+    }
+
+    @Test(expected = RecipeNotFoundException.class)
+    public void testDeleteRecipe() {
+        Recipe r = new Recipe();
+        r.setContributorName("Recipe IT Contributor Name");
+        r.setTitle("Recipe IT Title");
+        r.setInstructions("bla bla bla");
+        r.setNotes("notes go here");
+
+        Recipe createdRecipe = recipeService.createRecipe(r);
+
+        assertNotNull(createdRecipe.getId());
+
+        recipeService.deleteRecipe(createdRecipe.getId());
+
+        recipeService.findById(createdRecipe.getId());
     }
 
 }
