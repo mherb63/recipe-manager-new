@@ -42,19 +42,38 @@ public class RecipeServiceIT {
 
     @Test
     public void testFindByTitle() {
+        String title = "Recipe IT Title";
         Recipe r = new Recipe();
         r.setContributorName("Recipe IT Contributor Name");
+        r.setTitle(title);
+        r.setInstructions("bla bla bla");
+        r.setNotes("notes go here");
+
+        r = recipeService.createRecipe(r);
+
+        Recipe findByTitleRecipe = recipeService.findByTitle(title);
+        assertEquals(title, findByTitleRecipe.getTitle());
+
+        recipeService.deleteRecipe(findByTitleRecipe.getId());
+    }
+
+    @Test
+    public void testFindByContributorName() {
+        String contributorName = "Recipe IT Contributor Name";
+        Recipe r = new Recipe();
+        r.setContributorName(contributorName);
         r.setTitle("Recipe IT Title");
         r.setInstructions("bla bla bla");
         r.setNotes("notes go here");
 
         r = recipeService.createRecipe(r);
 
-        Recipe findByTitleRecipe = recipeService.findByTitle(r.getTitle());
-        assertEquals(findByTitleRecipe.getTitle(), r.getTitle());
+        Recipe findByContributorNameRecipe = recipeService.findByContributorName(contributorName);
+        assertEquals(contributorName, findByContributorNameRecipe.getContributorName());
 
-        recipeService.deleteRecipe(findByTitleRecipe.getId());
+        recipeService.deleteRecipe(findByContributorNameRecipe.getId());
     }
+
 
     @Test
     public void testReplaceRecipe() {
