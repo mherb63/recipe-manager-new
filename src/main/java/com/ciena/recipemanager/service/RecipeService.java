@@ -56,4 +56,8 @@ public class RecipeService {
         recipeRepository.deleteById(id);
         return r;
     }
+
+    public Recipe findByTitle(String title) {
+        return recipeRepository.findByTitle(title);
+    }
 }
