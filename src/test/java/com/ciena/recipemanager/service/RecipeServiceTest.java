@@ -85,4 +85,33 @@ public class RecipeServiceTest {
         verify(recipeRepository, times(1)).deleteById(anyString());
     }
 
+    @Test
+    public void testFindByTitle() {
+        String recipeTitle = "testRecipeTitle";
+        Recipe recipe = new Recipe();
+        recipe.setTitle(recipeTitle);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findByTitle(anyString())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findByTitle(recipeTitle);
+
+        assertNotNull("Null recipe returned", recipeReturned);
+        assertEquals(recipeTitle, recipeReturned.getTitle());
+    }
+
+    @Test void testFindByContributorName() {
+        String contributorName = "testRecipeContributorName";
+        Recipe recipe = new Recipe();
+        recipe.setContributorName(contributorName);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findByContributorName(anyString())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findByTitle(contributorName);
+
+        assertNotNull("Null recipe returned", recipeReturned);
+        assertEquals(contributorName, recipeReturned.getContributorName());
+    }
+
 }
