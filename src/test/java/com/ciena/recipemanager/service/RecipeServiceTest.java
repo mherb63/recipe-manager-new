@@ -100,7 +100,8 @@ public class RecipeServiceTest {
         assertEquals(recipeTitle, recipeReturned.getTitle());
     }
 
-    @Test void testFindByContributorName() {
+    @Test
+    public void testFindByContributorName() {
         String contributorName = "testRecipeContributorName";
         Recipe recipe = new Recipe();
         recipe.setContributorName(contributorName);
@@ -108,7 +109,7 @@ public class RecipeServiceTest {
 
         when(recipeRepository.findByContributorName(anyString())).thenReturn(recipeOptional);
 
-        Recipe recipeReturned = recipeService.findByTitle(contributorName);
+        Recipe recipeReturned = recipeService.findByContributorName(contributorName);
 
         assertNotNull("Null recipe returned", recipeReturned);
         assertEquals(contributorName, recipeReturned.getContributorName());
