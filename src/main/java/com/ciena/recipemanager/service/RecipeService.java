@@ -27,7 +27,7 @@ public class RecipeService {
 
     public Recipe findById(String id) {
         log.info("Received request to find Recipe with id: {}", id);
-        return recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(id));
+        return recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException("Could not find Recipe with id: " + id));
     }
 
     public Recipe createRecipe(Recipe recipe) {
@@ -58,6 +58,10 @@ public class RecipeService {
     }
 
     public Recipe findByTitle(String title) {
-        return recipeRepository.findByTitle(title);
+        return recipeRepository.findByTitle(title).orElseThrow(() -> new RecipeNotFoundException("Could not find Recipe with title: " + title));
+    }
+
+    public Recipe findByContributorName(String contributorName) {
+        return recipeRepository.findByContributorName(contributorName).orElseThrow(() -> new RecipeNotFoundException("Could not find Recipe with contributor name: " + contributorName));
     }
 }
